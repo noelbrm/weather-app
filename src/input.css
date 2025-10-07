@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+@import "tailwindcss";
+
+body {
+    color: #141414;
+    font-family: Manrope;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-y: auto; /* Allow vertical scrolling */
+    margin: 0;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:url('../city.jpg');
+    /*background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../city.jpg');*/
+    background-attachment: scroll;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(4px);
+    z-index: -1;
+    transform: scale(1.1);
+}
+
+.btn-city {
+    @apply py-2 px-4 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 text-white hover:bg-white/40 hover:scale-105 duration-150;
+}

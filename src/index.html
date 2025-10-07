@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="./ouput.css" rel="stylesheet">
+</head>
+<body class="">
+<header class="py-8 text-center text-white">
+	<div class="flex flex-row justify-center items-center mb-4 gap-3">
+		<img class="w-8 h-8" src="../icons/bigones/icons8-cloud-white.png"></img>
+		<h1 class="text-4xl">Weather App</h1>
+	</div>
+	<p>Get current weather information for any city</p>
+</header>
+<main>
+	<section class="mx-auto max-w-3xl flex flex-col items-center gap-6">
+		<!--City search input and button-->
+		<div class="flex flex-row justify-between w-4/6 gap-3  text-sm">
+			<input class="bg-[#F6F5F3] rounded-md py-2 px-3 flex-grow" type="text"
+				placeholder="Search for a city">
+			<button class="bg-black text-white rounded-md py-2 px-5">Search</button>
+		</div>
+		<div class="w-4/6 bg-[#F5F5F0] rounded-xl p-8 text-center flex flex-col shadow-lg ">
+			<h2 class="text-2xl font-bold">New York</h2>
+			<p class="text-gray-500 font-light">United States</p>
+			<div class="flex flex-row justify-center gap-3 items-center mb-5 mt-7">
+				<img class="w-19 h-19 self-baseline" alt="weather icon" src="../icons/bigones/icons8-sun-961.png">
+				<div class="flex flex-col justify-center">
+					<span class="text-6xl mb-3">22°</span>
+					<span class="text-sm">Partly Cloudy</span>
+				</div>
+			</div>
+			<p class="text-gray-500 font-light">A pleasant day with some clouds</p>
+			<div class="grid grid-cols-2 gap-5 mt-5 border-t border-gray-300 pt-5">
+				<div class="rounded-xl bg-[#F1F0E8]">
+					<p class="mb-2 text-gray-500 text-sm font-light">Feels Like</p>
+					<p>24°</p>
+				</div>
+				<div class="rounded-xl bg-[#F1F0E8]">
+					<p class="mb-2 text-gray-500 text-sm font-light">Humidity</p>
+					<p>65%</p>
+				</div>
+				<div class="rounded-xl bg-[#F1F0E8]">
+					<p class="mb-2 text-gray-500 text-sm font-light">Wind</p>
+					<p>12 km/h</p>
+				</div>
+				<div class="rounded-xl bg-[#F1F0E8]">
+					<p class="mb-2 text-gray-500 text-sm font-light">Pressure</p>
+					<p>1013 hPa</p>
+				</div>
+			</div>
+		</div>
+		<p class="text-white mt-5">Popular Cities</p>
+		<div class="flex flex-wrap gap-x-3 gap-y-2 justify-center w-4/6 text-sm">
+			<button class="btn-city">London</button>
+			<button class="btn-city">Tokyo</button>
+			<button class="btn-city">New York</button>
+			<button class="btn-city">Paris</button>
+			<button class="btn-city">Rome</button>
+			<button class="btn-city">Zurich</button>
+			<button class="btn-city">Madrid</button>
+			<button class="btn-city">Barcelona</button>
+			<button class="btn-city">Berlin</button>
+		</div>
+	</section>
+</main>
+<footer class="p-1"><p>&copy; Noel Bromkamp</p></footer>
+</body>
+</html>
