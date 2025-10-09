@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 body {
-    color: #141414;
+    color: #1C1F22;
     font-family: Manrope;
     min-height: 100vh;
     position: relative;
@@ -15,7 +15,8 @@ body::before {
     content: "";
     position: fixed;
     inset: 0;
-    background-image:url('../city.jpg');
+    /*background-image:url('../city-night.jpg');*/
+    background-image: url("https://images.pexels.com/photos/30993363/pexels-photo-30993363.jpeg");
     /*background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../city.jpg');*/
     background-attachment: scroll;
     background-repeat: no-repeat;

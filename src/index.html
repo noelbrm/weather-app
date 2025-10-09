@@ -3,12 +3,13 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script type="module" src="../app.js"></script>
 	<link href="./ouput.css" rel="stylesheet">
 </head>
 <body class="">
 <header class="py-8 text-center text-white">
 	<div class="flex flex-row justify-center items-center mb-4 gap-3">
-		<img class="w-8 h-8" src="../icons/bigones/icons8-cloud-white.png"></img>
+		<img class="w-10 h-10" src="../icons/icons8-cloud-white.png"></img>
 		<h1 class="text-4xl">Weather App</h1>
 	</div>
 	<p>Get current weather information for any city</p>
@@ -17,41 +18,50 @@
 	<section class="mx-auto max-w-3xl flex flex-col items-center gap-6">
 		<!--City search input and button-->
 		<div class="flex flex-row justify-between w-4/6 gap-3  text-sm">
-			<input class="bg-[#F6F5F3] rounded-md py-2 px-3 flex-grow" type="text"
-				placeholder="Search for a city">
-			<button class="bg-black text-white rounded-md py-2 px-5">Search</button>
+			<input class="bg-[#F3F4F6] rounded-md py-2 px-3 flex-grow" type="text"
+				placeholder="Search for a city.." id="input-search">
+			<button class="bg-[#1C1F22] text-white rounded-md py-2 px-5" id="btn-search cursor-pointer">Search</button>
 		</div>
-		<div class="w-4/6 bg-[#F5F5F0] rounded-xl p-8 text-center flex flex-col shadow-lg ">
-			<h2 class="text-2xl font-bold">New York</h2>
-			<p class="text-gray-500 font-light">United States</p>
+		<div class="w-4/6 bg-[#F3F4F6] rounded-xl p-8 text-center flex flex-col shadow-lg ">
+			<h2 class="text-3xl font-bold" id="text-country">New York</h2>
+			<p class="text-gray-500 font-light" id="text-city">United States</p>
 			<div class="flex flex-row justify-center gap-3 items-center mb-5 mt-7">
-				<img class="w-19 h-19 self-baseline" alt="weather icon" src="../icons/bigones/icons8-sun-961.png">
+				<img class="w-19 h-19 self-baseline" alt="weather icon" src="../icons/bigones/clear-sky.png"
+					id="icon-weather">
 				<div class="flex flex-col justify-center">
-					<span class="text-6xl mb-3">22°</span>
-					<span class="text-sm">Partly Cloudy</span>
+					<span class="text-6xl mb-3" id="text-temp">0°</span>
+					<span class="text-sm" id="text-weather-info">Partly Cloudy</span>
 				</div>
 			</div>
-			<p class="text-gray-500 font-light">A pleasant day with some clouds</p>
+			<p class="text-gray-500 font-light">Last Update: <span id="text-time">12:12</span></p>
 			<div class="grid grid-cols-2 gap-5 mt-5 border-t border-gray-300 pt-5">
-				<div class="rounded-xl bg-[#F1F0E8]">
+				<div class="rounded-xl bg-[#E9EBED]">
 					<p class="mb-2 text-gray-500 text-sm font-light">Feels Like</p>
-					<p>24°</p>
+					<p id="text-feel-temp">24°</p>
 				</div>
-				<div class="rounded-xl bg-[#F1F0E8]">
+				<div class="rounded-xl bg-[#E9EBED]">
 					<p class="mb-2 text-gray-500 text-sm font-light">Humidity</p>
-					<p>65%</p>
+					<p id="text-Humidity">65%</p>
 				</div>
-				<div class="rounded-xl bg-[#F1F0E8]">
+				<div class="rounded-xl bg-[#E9EBED]">
 					<p class="mb-2 text-gray-500 text-sm font-light">Wind</p>
-					<p>12 km/h</p>
+					<p id="text-wind">12 km/h</p>
 				</div>
-				<div class="rounded-xl bg-[#F1F0E8]">
+				<div class="rounded-xl bg-[#E9EBED]">
 					<p class="mb-2 text-gray-500 text-sm font-light">Pressure</p>
-					<p>1013 hPa</p>
+					<p id="text-pressure">1013 hPa</p>
 				</div>
 			</div>
 		</div>
-		<p class="text-white mt-5">Popular Cities</p>
+		<div
+			class="w-1/4 rounded-2xl bg-[#F3F4F6] border border-black/30 flex flex-row justify-between items-center self-center">
+			<button class="p-2 rounded-l-2xl hover:bg-[#DDE0E3]"><img src="../icons/icons8-less-than-32.png" class="w-4" alt="links"></button>
+			<p class="font-light text-sm text">Today</p>
+			<button class="p-2 rounded-r-2xl hover:bg-[#DDE0E3]"><img src="../icons/icons8-less-than-32%20(1).png"
+				class="w-4"
+				alt="rechts"></button>
+		</div>
+		<p class="text-white">Popular Cities</p>
 		<div class="flex flex-wrap gap-x-3 gap-y-2 justify-center w-4/6 text-sm">
 			<button class="btn-city">London</button>
 			<button class="btn-city">Tokyo</button>
