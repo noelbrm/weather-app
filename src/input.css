@@ -16,7 +16,7 @@ body::before {
     position: fixed;
     inset: 0;
     /*background-image:url('../city-night.jpg');*/
-    background-image: url("https://images.pexels.com/photos/30993363/pexels-photo-30993363.jpeg");
+    background-image: var(--bg-url);
     /*background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../city.jpg');*/
     background-attachment: scroll;
     background-repeat: no-repeat;
