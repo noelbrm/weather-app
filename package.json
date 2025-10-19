@@ -2,10 +2,10 @@
   "name": "weatherapp",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "scripts/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch\n"
+    "dev": "npx @tailwindcss/cli -i ./css/input.css -o ./css/output.css --watch\n"
   },
   "author": "",
   "license": "ISC",

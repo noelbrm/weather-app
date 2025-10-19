@@ -1,4 +1,4 @@
-export const COUNTRY_CODES = {
+{
   "Afghanistan": "AF",
   "Aland Islands": "AX",
   "Albania": "AL",
@@ -245,4 +245,4 @@ export const COUNTRY_CODES = {
   "Yemen": "YE",
   "Zambia": "ZM",
   "Zimbabwe": "ZW"
-};
+}
