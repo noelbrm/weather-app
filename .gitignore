@@ -3,5 +3,4 @@ dist/
 build/
 *.css
 !css/input.css
-!css/output.css
 config.js
