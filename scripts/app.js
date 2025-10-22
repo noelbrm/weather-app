@@ -1,5 +1,3 @@
-import {CONFIG} from '../config.js'
-
 const inputSearch = document.getElementById('input-search');
 const btnSearch = document.getElementById('btn-search');
 const textCity = document.getElementById('text-city');
