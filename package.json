@@ -5,6 +5,7 @@
   "main": "scripts/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "npx tailwindcss -i ./css/input.css -o ./css/output.css --minify",
     "dev": "npx @tailwindcss/cli -i ./css/input.css -o ./css/output.css --watch\n",
     "netlify": ".\\node_modules\\.bin\\netlify"
   },
