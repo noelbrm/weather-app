@@ -157,8 +157,7 @@ function displayWeather(weatherData) {
 //City background API functions and helper functions
 async function cityImage(cityName) {
     const query = encodeURIComponent(cityName + " Skyline City");
-    const orientation = "landscape"
-    const response = await fetch(`/.netlify/functions/fetch-pexels?query=${query}`);
+    const response = await fetch(`${pictureAPI}query=${query}`);
 
     if (!response.ok) throw new Error("Pexels request failed");
     const pictureData = await response.json();
@@ -209,10 +208,11 @@ function renderSuggestions(matches) {
 function getForecast(forecast) {
     const dateToday = new Date();
     let weatherData = [];
-
+    let vorDay = null;
     for (let i = 0; i < forecast.length; i++) {
         const date = new Date(forecast[i].dt * 1000);
-        if (date.getHours() === 14 || i === 0) {
+        const nowDay = date.getDate()
+        if (((nowDay !== vorDay) && date.getHours() >= 12) || i === 0) {
             weatherData.push({
                 day: date.getDay() === dateToday.getDay() ? "Today" : weekdays[date.getDay()],
                 date: months[date.getMonth()].slice(0, 3) + " " + date.getDate(),
@@ -224,6 +224,7 @@ function getForecast(forecast) {
         } else {
             continue;
         }
+        vorDay = nowDay;
         if (weatherData.length === 5) {
             break;
         }

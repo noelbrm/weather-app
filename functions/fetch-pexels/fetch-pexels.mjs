@@ -14,7 +14,6 @@ export async function handler(event, context) {
         }
 
         const API_PEXELS = process.env.API_PEXELS;
-        console.log(query);
         const url = `https://api.pexels.com/v1/search`;
 
         const {data} = await axios.get(url, {
