@@ -29,9 +29,8 @@ let debounceTimer;
 
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-const weatherAPI5 = 'https://api.openweathermap.org/data/2.5/forecast?';
-const pictureAPI = 'https://api.pexels.com/v1/search?'
-const weatherKEY = CONFIG.OPENWEATHER_API_KEY
+const weatherAPI = '/.netlify/functions/fetch-weather?';
+const pictureAPI = 'https://api.pexels.com/v1/search?';
 
 //Event Listener
 buttonLeft.addEventListener('click', e => {
@@ -101,7 +100,7 @@ function switchView(mode) {
 //Weather API functions and helper functions
 async function loadCountryCodes() {
     if (!COUNTRY_CODES) {
-        const res = await fetch("data/counrty-codes.json");
+        const res = await fetch("../data/counrty-codes.json");
         COUNTRY_CODES = await res.json();
     }
 }
@@ -112,8 +111,8 @@ async function buildUrl(country) {
 
     const [city, countryName] = val.split(",").map(s => s.trim());
     const countryCode = COUNTRY_CODES[countryName] || null;
-    const query = countryCode ? `q=${city},${countryCode}` : `q=${city}`;
-    return `${weatherAPI5}${query}&units=metric&appid=${weatherKEY}`
+    const query = countryCode ? `${city},${countryCode}` : city;
+    return `${weatherAPI}q=${query}`;
 }
 
 function getCountryNameByCode(code) {
@@ -161,9 +160,8 @@ function displayWeather(weatherData) {
 async function cityImage(cityName) {
     const query = encodeURIComponent(cityName + " Skyline City");
     const orientation = "landscape"
-
     try {
-        const response = await fetch(`${pictureAPI}query=${query}&orientation=${orientation}&per_page=1`, {
+        const response = await fetch(`${pictureAPI}query=${query}`, {
             headers: {
                 Authorization: CONFIG.PEXELS_API_KEY
             }
@@ -181,7 +179,7 @@ async function cityImage(cityName) {
 }
 
 async function loadCities() {
-    const res = await fetch("data/all-countries-and-cities.json");
+    const res = await fetch("../data/all-countries-and-cities.json");
     const data = await res.json();
     cities = Object.keys(data).flatMap(country =>
         data[country].map(city => ({city, country}))
@@ -265,23 +263,23 @@ function getIcon(weatherDescription) {
     let pictureSrc;
     switch (weatherDescription) {
         case 'Clouds':
-            pictureSrc = 'icons/bigones/scatterd-clouds.png';
+            pictureSrc = '../icons/bigones/scatterd-clouds.png';
             break;
         case 'Thunderstorm':
-            pictureSrc = 'icons/bigones/lightning.png';
+            pictureSrc = '../icons/bigones/lightning.png';
             break;
         case 'Drizzle':
         case 'Rain':
-            pictureSrc = 'icons/bigones/rainpng.png';
+            pictureSrc = '../icons/bigones/rainpng.png';
             break;
         case 'Snow':
-            pictureSrc = 'icons/bigones/snow.png';
+            pictureSrc = '../icons/bigones/snow.png';
             break;
         case 'Clear':
-            pictureSrc = 'icons/bigones/clear-sky.png';
+            pictureSrc = '../icons/bigones/clear-sky.png';
             break;
         default:
-            pictureSrc = 'icons/bigones/scatterd-clouds.png';
+            pictureSrc = '../icons/bigones/scatterd-clouds.png';
             break;
     }
     return pictureSrc;

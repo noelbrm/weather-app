@@ -3,4 +3,7 @@ dist/
 build/
 *.css
 !css/input.css
+.env
 config.js
+# Local Netlify folder
+.netlify

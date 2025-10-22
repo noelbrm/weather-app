@@ -5,12 +5,16 @@
   "main": "scripts/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx @tailwindcss/cli -i ./css/input.css -o ./css/output.css --watch\n"
+    "dev": "http-server weather-app -p 8080",
+    "netlify": ".\\node_modules\\.bin\\netlify"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@tailwindcss/cli": "^4.1.14",
+    "axios": "^1.12.2",
+    "concurrently": "^9.2.1",
+    "netlify-cli": "^23.9.2",
     "pexels": "^1.4.0",
     "tailwindcss": "^4.1.14"
   }
