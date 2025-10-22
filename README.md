@@ -6,4 +6,4 @@ A simple weather app that displays the current weather and a 5-day forecast for 
 Visit here: https://classy-cheesecake-ed9378.netlify.app/
 
 ## Demo
-![Demo gif] (https://i.imgur.com/7jwVV4l.gif)
+![Demo gif](https://i.imgur.com/7jwVV4l.gif)
