@@ -161,7 +161,7 @@ async function cityImage(cityName) {
     try {
         const response = await fetch(`${pictureAPI}query=${query}`, {
             headers: {
-                Authorization: CONFIG.PEXELS_API_KEY
+                Authorization: process.env.PEXELS_API_KEY
             }
         });
 
