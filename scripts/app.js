@@ -158,22 +158,15 @@ function displayWeather(weatherData) {
 async function cityImage(cityName) {
     const query = encodeURIComponent(cityName + " Skyline City");
     const orientation = "landscape"
-    try {
-        const response = await fetch(`${pictureAPI}query=${query}`, {
-            headers: {
-                Authorization: process.env.API_PEXELS
-            }
-        });
+    const response = await fetch(`/.netlify/functions/fetch-pexels?query=${query}`);
 
-        if (!response.ok) throw new Error("Pexels request failed");
-        const pictureData = await response.json();
-        const newImage = pictureData.photos[0].src.landscape;
-        document.body.style.setProperty('--bg-url', `url("${newImage}")`);
-        document.getElementById('photographer-link').innerText = `${pictureData.photos[0].photographer}`;
-        document.getElementById('photographer-link').href = pictureData.photos[0].photographer_url;
-    } catch (err) {
-        console.error(err);
-    }
+    if (!response.ok) throw new Error("Pexels request failed");
+    const pictureData = await response.json();
+    const newImage = pictureData.photos[0].src.landscape;
+    document.body.style.setProperty('--bg-url', `url("${newImage}")`);
+    document.getElementById('photographer-link').innerText = `${pictureData.photos[0].photographer}`;
+    document.getElementById('photographer-link').href = pictureData.photos[0].photographer_url;
+
 }
 
 async function loadCities() {

@@ -14,9 +14,19 @@ export async function handler(event, context) {
         }
 
         const API_PEXELS = process.env.API_PEXELS;
-        const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&appid=${API_PEXELS}&orientation=landscape&per_page=1`;
+        console.log(query);
+        const url = `https://api.pexels.com/v1/search`;
 
-        const {data} = await axios.get(url);
+        const {data} = await axios.get(url, {
+            params: {
+                query: query,
+                orientation: "landscape",
+                per_page: 1
+            },
+            headers: {
+                Authorization: API_PEXELS
+            }
+        });
 
         return {
             statusCode: 200,
