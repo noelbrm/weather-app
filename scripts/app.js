@@ -28,7 +28,7 @@ let debounceTimer;
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 const weatherAPI = '/.netlify/functions/fetch-weather?';
-const pictureAPI = 'https://api.pexels.com/v1/search?';
+const pictureAPI = '/.netlify/functions/fetch-pexels?';
 
 //Event Listener
 buttonLeft.addEventListener('click', e => {
