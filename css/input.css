@@ -6,8 +6,8 @@ body {
     font-family: Manrope;
     min-height: 100vh;
     position: relative;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-    overflow-y: auto; /* Allow vertical scrolling */
+    overflow-x: hidden;
+    overflow-y: auto;
     margin: 0;
 }
 

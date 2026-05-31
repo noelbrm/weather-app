@@ -15,6 +15,8 @@ const currentWeather = document.getElementById('current-weather');
 const forecastWeather = document.getElementById('5day-weather');
 const buttonRight = document.getElementById('button-right');
 const buttonLeft = document.getElementById('button-left');
+const viewText = document.getElementById('view-text');
+const photographerLink = document.getElementById('photographer-link');
 const btnCities = document.querySelectorAll('.btn-city');
 const forecastContainer = document.querySelector('.forecast-days');
 const suggestionsContainer = document.createElement("ul");
@@ -22,7 +24,7 @@ suggestionsContainer.classList.add("absolute", "bg-white", "rounded-md", "shadow
 inputSearch.parentElement.appendChild(suggestionsContainer);
 
 let cities = null;
-let COUNTRY_CODES = null;
+let countryCodes = null;
 let debounceTimer;
 
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -33,13 +35,13 @@ const pictureAPI = '/.netlify/functions/fetch-pexels?';
 //Event Listener
 buttonLeft.addEventListener('click', e => {
     const mode = e.currentTarget.dataset.mode;
-    document.getElementById('view-text').innerText = 'Today';
+    viewText.innerText = 'Today';
     switchView(mode);
 });
 
 buttonRight.addEventListener("click", (e) => {
     const mode = e.currentTarget.dataset.mode;
-    document.getElementById('view-text').innerText = '5-Day forecast';
+    viewText.innerText = '5-Day forecast';
     switchView(mode);
 });
 
@@ -80,8 +82,11 @@ function showElement(el) {
 }
 
 function hideElement(el) {
-    el.classList.add('hidden');
-    el.setAttribute('aria-hidden', 'true');
+    if (el) {
+        el.classList.add('hidden');
+        el.setAttribute('aria-hidden', 'true');
+
+    }
 }
 
 function switchView(mode) {
@@ -97,30 +102,35 @@ function switchView(mode) {
 
 //Weather API functions and helper functions
 async function loadCountryCodes() {
-    if (!COUNTRY_CODES) {
-        const res = await fetch("../data/counrty-codes.json");
-        COUNTRY_CODES = await res.json();
+    if (!countryCodes) {
+        const response = await fetch("../data/counrty-codes.json");
+        if (!response.ok) throw new Error("Country codes could not be loaded");
+        countryCodes = await response.json();
     }
 }
 
-async function buildUrl(country) {
-    const val = (typeof country === 'string') ? country : country?.value;
-    if (!val || val.trim() === "") return null;
+function buildUrl(searchValue) {
+    const inputValue = (typeof searchValue === 'string') ? searchValue : searchValue?.value;
+    if (!inputValue || inputValue.trim() === "") return null;
 
-    const [city, countryName] = val.split(",").map(s => s.trim());
-    const countryCode = COUNTRY_CODES[countryName] || null;
+    const [city, countryName] = inputValue.split(",").map(s => s.trim());
+    const countryCode = countryCodes?.[countryName] || null;
     const query = countryCode ? `${city},${countryCode}` : city;
     return `${weatherAPI}q=${query}`;
 }
 
 function getCountryNameByCode(code) {
-    return Object.keys(COUNTRY_CODES).find(
-        country => COUNTRY_CODES[country] === code) || null;
+    return Object.keys(countryCodes).find(
+        country => countryCodes[country] === code) || null;
 }
 
-async function getWeather(inputName1) {
-    const url = await buildUrl(inputName1);
+async function getWeather(searchValue) {
+    const url = buildUrl(searchValue);
     if (!url) return;
+    await loadWeather(url);
+}
+
+async function loadWeather(url) {
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -156,21 +166,27 @@ function displayWeather(weatherData) {
 
 //City background API functions and helper functions
 async function cityImage(cityName) {
-    const query = encodeURIComponent(cityName + " Skyline City");
-    const response = await fetch(`${pictureAPI}query=${query}`);
+    try {
+        const query = encodeURIComponent(cityName + " Skyline City");
+        const response = await fetch(`${pictureAPI}query=${query}`);
 
-    if (!response.ok) throw new Error("Pexels request failed");
-    const pictureData = await response.json();
-    const newImage = pictureData.photos[0].src.landscape;
-    document.body.style.setProperty('--bg-url', `url("${newImage}")`);
-    document.getElementById('photographer-link').innerText = `${pictureData.photos[0].photographer}`;
-    document.getElementById('photographer-link').href = pictureData.photos[0].photographer_url;
+        if (!response.ok) throw new Error("Pexels request failed");
+        const pictureData = await response.json();
+        const picture = pictureData.photos?.[0];
+        if (!picture) return;
 
+        document.body.style.setProperty('--bg-url', `url("${picture.src.landscape}")`);
+        photographerLink.innerText = picture.photographer;
+        photographerLink.href = picture.photographer_url;
+    } catch (err) {
+        console.error(err);
+    }
 }
 
 async function loadCities() {
-    const res = await fetch("../data/all-countries-and-cities.json");
-    const data = await res.json();
+    const response = await fetch("../data/all-countries-and-cities.json");
+    if (!response.ok) throw new Error("Cities could not be loaded");
+    const data = await response.json();
     cities = Object.keys(data).flatMap(country =>
         data[country].map(city => ({city, country}))
     );
@@ -178,6 +194,8 @@ async function loadCities() {
 
 //Show city suggestions to user
 function showSuggestions(query) {
+    if (!cities) return;
+
     const matches = cities.filter(({city}) =>
         city.toLowerCase().startsWith(query)
     ).slice(0, 4);
@@ -252,35 +270,28 @@ function showForecast(foreCastData) {
 }
 
 function getIcon(weatherDescription) {
-    let pictureSrc;
-    switch (weatherDescription) {
-        case 'Clouds':
-            pictureSrc = '../icons/bigones/scatterd-clouds.png';
-            break;
-        case 'Thunderstorm':
-            pictureSrc = '../icons/bigones/lightning.png';
-            break;
-        case 'Drizzle':
-        case 'Rain':
-            pictureSrc = '../icons/bigones/rainpng.png';
-            break;
-        case 'Snow':
-            pictureSrc = '../icons/bigones/snow.png';
-            break;
-        case 'Clear':
-            pictureSrc = '../icons/bigones/clear-sky.png';
-            break;
-        default:
-            pictureSrc = '../icons/bigones/scatterd-clouds.png';
-            break;
-    }
-    return pictureSrc;
+    const icons = {
+        Clouds: '../icons/bigones/scatterd-clouds.png',
+        Thunderstorm: '../icons/bigones/lightning.png',
+        Drizzle: '../icons/bigones/rainpng.png',
+        Rain: '../icons/bigones/rainpng.png',
+        Snow: '../icons/bigones/snow.png',
+        Clear: '../icons/bigones/clear-sky.png'
+    };
+
+    return icons[weatherDescription] || '../icons/bigones/scatterd-clouds.png';
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-    await loadCountryCodes();
-    await getWeather("Tokyo, Japan")
-    await loadCities();
-    switchView('current');
-    loadingWeather.classList.add('hidden')
+    try {
+        await loadCountryCodes();
+        await getWeather("Frankfurt am Main, Germany")
+        await loadCities();
+        switchView('current');
+    } catch (err) {
+        console.error(err);
+        inputSearch.classList.add('bg-red-100');
+    } finally {
+        loadingWeather.classList.add('hidden')
+    }
 });

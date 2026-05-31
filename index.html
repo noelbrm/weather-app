@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Weather App: get weather information for any city">
         <meta name="author" content="Noel Bromkamp">
-        <title id="Weather"></title>
+        <title id="Weather">Weather App</title>
         <link rel="icon" type="image/x-icon" href="icons/favicon.ico">
         <link href="css/output.css" rel="stylesheet">
     </head>
@@ -19,12 +19,11 @@
         </header>
         <main class="flex-grow">
             <section class="mx-auto max-w-3xl flex flex-col items-center gap-6">
-                <!--City search input and button-->
                 <div class="flex flex-row justify-between w-5/6 sm:w-4/6 gap-3  text-sm">
                     <div class="relative flex-grow">
                         <input class="bg-[#F3F4F6] rounded-md py-2 px-3 w-full focus"
                                type="text"
-                               placeholder="Search for a city.."
+                               placeholder="Search for a city..."
                                id="input-search"
                                autocomplete="off">
                     </div>
@@ -34,10 +33,9 @@
                     </button>
                 </div>
                 <div class="w-5/6 sm:w-4/6 bg-[#F3F4F6] rounded-xl p-5 sm:p-8 text-center flex flex-col shadow-lg">
-                    <div class="" id="loading-weather">
+                    <div id="loading-weather">
                         <p>Loading...</p>
                     </div>
-                    <!--			Container for Current Weather-->
                     <h2 class="text-3xl font-bold" id="text-country"></h2>
                     <p class="text-gray-500 font-light" id="text-city"></p>
                     <div class="hidden" id="current-weather">
@@ -69,11 +67,9 @@
                             </div>
                         </div>
                     </div>
-                    <!--			Container for 5 days weather forecast-->
                     <div class="hidden" id="5day-weather">
                         <div class="flex flex-col">
                             <div class="flex flex-col gap-4 mt-4 forecast-days">
-                                <!--Classes are added here through js-->
                             </div>
                         </div>
                     </div>
@@ -116,9 +112,8 @@
             </section>
         </main>
         <footer class="p-2 text-white flex flex-col items-center justify-center gap-1 mt-6 text-xs sm:flex-row sm:gap-5">
-            <p>&copy; 2025 Noel Bromkamp</p>
             <p>Pexels photographer:
-                <a id="photographer-link" href="https://www.pexels.com/">Pexels</a>
+                <a id="photographer-link" href="https://www.pexels.com/" target="_blank">Pexels</a>
             </p>
         </footer>
         <script type="module" src="scripts/app.js"></script>
